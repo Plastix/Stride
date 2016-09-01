@@ -6,8 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import io.github.plastix.stride.ApplicationComponent
 import io.github.plastix.stride.R
+import io.github.plastix.stride.databinding.ActivityMainBinding
 import io.github.plastix.stride.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,12 +17,14 @@ class MainActivity : BaseActivity() {
     lateinit var viewModel: MainViewModel
 
     private val binding by lazy {
-        DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.activity_main)
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(mainToolbar)
+        setSupportActionBar(binding.mainToolbar)
+
+        binding.viewModel = viewModel
     }
 
     override fun injectDependencies(graph: ApplicationComponent) {

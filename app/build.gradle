@@ -111,7 +111,7 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.1.2'
 
     // Databinding
-    kapt 'com.google.guava:guava:19.0'
+    kapt 'com.google.guava:guava:19.0' // Required to get databinding to compile
     kapt "com.android.databinding:compiler:$android_plugin_version"
 
     // Unit Testing

@@ -35,6 +35,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     sourceSets {
         // Main source set is Kotlin!
         main.java.srcDirs += 'src/main/kotlin'
@@ -105,6 +109,9 @@ dependencies {
 
     // Misc
     compile 'com.jakewharton.timber:timber:4.1.2'
+
+    // Databinding
+    kapt 'com.android.databinding:compiler:2.1.2'
 
     // Unit Testing
     testCompile 'junit:junit:4.12'

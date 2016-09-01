@@ -1,5 +1,6 @@
 package io.github.plastix.stride.ui.main
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,12 +9,19 @@ import io.github.plastix.stride.R
 import io.github.plastix.stride.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
+import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
+    @Inject
+    lateinit var viewModel: MainViewModel
+
+    private val binding by lazy {
+        DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.activity_main)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setSupportActionBar(mainToolbar)
     }
 
@@ -23,6 +31,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true

@@ -6,4 +6,5 @@ import io.github.plastix.stride.ui.base.ActivityModule
 
 @Module
 class MainModule(activity: AppCompatActivity) : ActivityModule(activity) {
+
 }

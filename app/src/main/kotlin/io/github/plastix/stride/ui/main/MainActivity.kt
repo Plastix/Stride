@@ -8,24 +8,24 @@ import io.github.plastix.stride.ApplicationComponent
 import io.github.plastix.stride.R
 import io.github.plastix.stride.databinding.ActivityMainBinding
 import io.github.plastix.stride.ui.base.BaseActivity
+import io.github.plastix.stride.ui.base.ViewModelActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModel: MainViewModel
-
-    private val binding by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-    }
+class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.mainToolbar)
 
+        setViewModel()
+    }
+
+    private fun setViewModel() {
         binding.viewModel = viewModel
     }
+
+    override fun getViewBinding(): ActivityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
     override fun injectDependencies(graph: ApplicationComponent) {
         graph.plus(MainModule(this))

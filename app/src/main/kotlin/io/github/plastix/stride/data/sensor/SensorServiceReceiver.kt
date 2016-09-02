@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 /**
- * A Broadcast reciever which will start the SensorService
+ * A Broadcast receiver which will start the SensorService
  */
 class SensorServiceReceiver : BroadcastReceiver() {
 

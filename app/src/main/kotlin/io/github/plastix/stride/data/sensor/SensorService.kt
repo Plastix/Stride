@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import io.github.plastix.stride.StrideApp
+import rx.Observable
 import rx.Subscription
 import rx.lang.kotlin.BehaviorSubject
 import rx.subscriptions.Subscriptions
@@ -39,7 +40,7 @@ class SensorService : Service() {
         fun getService() = this@SensorService
     }
 
-    fun getRawStepCount() = subject.asObservable()
+    fun getRawStepCount(): Observable<Float> = subject.asObservable()
 
     /**
      * The hardware step sensor on Android will only keep counting steps if listeners are attached.

@@ -6,15 +6,13 @@ import io.github.plastix.stride.BR
 import io.github.plastix.stride.data.DataManager
 import io.github.plastix.stride.ui.ActivityScope
 import io.github.plastix.stride.ui.base.RxViewModel
-import rx.Observable
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @ActivityScope
 class MainViewModel @Inject constructor(@ActivityScope val context: Context, val dataManager: DataManager) : RxViewModel() {
 
-    var steps: String = ""
+    var steps: String = "0"
         @Bindable get
         set(value) {
             field = value
@@ -24,9 +22,11 @@ class MainViewModel @Inject constructor(@ActivityScope val context: Context, val
 
     override fun bind() {
         addSubscription(
-                Observable.interval(1, TimeUnit.SECONDS)
+                dataManager.getStepCountToday()
                         .map { it.toString() }
-                        .doOnNext { Timber.d(it) }
+                        .doOnNext {
+                            Timber.d("Got step update! %s", it)
+                        }
                         .subscribe { steps = it }
 
         )

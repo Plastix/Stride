@@ -1,6 +1,7 @@
 package io.github.plastix.stride.ui.base
 
 import android.databinding.ViewDataBinding
+import android.os.Build
 import javax.inject.Inject
 
 abstract class ViewModelActivity<T : AbstractViewModel, out B : ViewDataBinding> : BaseActivity() {
@@ -19,6 +20,19 @@ abstract class ViewModelActivity<T : AbstractViewModel, out B : ViewDataBinding>
 
     override fun onStop() {
         super.onStop()
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            onHidden()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            onHidden()
+        }
+    }
+
+    private fun onHidden() {
         viewModel.unbind()
     }
 }

@@ -7,6 +7,7 @@ import io.github.plastix.stride.ApplicationQualifier
 import io.github.plastix.stride.data.sensor.SensorService
 import rx.AsyncEmitter
 import rx.Observable
+import rx.Subscription
 import rx.functions.Action1
 import rx.subscriptions.Subscriptions
 import timber.log.Timber
@@ -20,9 +21,9 @@ class DataManager @Inject constructor(@ApplicationQualifier var context: Context
         const val PREF_STEP_COUNT = "STEP_COUNT"
     }
 
-    var subscription = Subscriptions.unsubscribed()
+    var subscription: Subscription = Subscriptions.unsubscribed()
 
-    var preferences = PreferenceManager.getDefaultSharedPreferences(context)
+    var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     init {
         val intent = Intent(context, SensorService::class.java)
@@ -35,9 +36,7 @@ class DataManager @Inject constructor(@ApplicationQualifier var context: Context
         val sensorService = binder.getService()
 
         subscription = sensorService.getRawStepCount()
-                .map {
-                    it.toInt()
-                }
+                .map(Float::toInt)
                 .subscribe({
                     saveStepCount(it)
                 }) {

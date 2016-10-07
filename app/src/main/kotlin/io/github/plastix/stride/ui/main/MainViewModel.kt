@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(@ActivityScope val context: Context, val
     override fun bind() {
         addSubscription(
                 dataManager.getStepCountToday()
-                        .map { it.toString() }
+                        .map(Int::toString)
                         .doOnNext {
                             Timber.d("Got step update! %s", it)
                         }

@@ -7,10 +7,8 @@ import android.view.MenuItem
 import io.github.plastix.stride.ApplicationComponent
 import io.github.plastix.stride.R
 import io.github.plastix.stride.databinding.ActivityMainBinding
-import io.github.plastix.stride.ui.base.BaseActivity
 import io.github.plastix.stride.ui.base.ViewModelActivity
 import timber.log.Timber
-import javax.inject.Inject
 
 class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>() {
 

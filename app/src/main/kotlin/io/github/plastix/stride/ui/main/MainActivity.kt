@@ -14,7 +14,6 @@ class MainActivity : ViewModelActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.mainToolbar)
 
         setViewModel()
     }
